@@ -39,6 +39,8 @@ function renderRepos(username) {
       a.textContent = repo.full_name
       a.target = '_blank'
 
+      li.classList.add('list-group-item')
+
       // append list item to body
       li.appendChild(a)
       // append list item to linkList 
