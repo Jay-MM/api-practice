@@ -7,9 +7,30 @@ const input = document.getElementById('search-input');
 const linkList = document.querySelector('.list-group');
 
 function renderUserProfile(username) {
-  console.log('hellow from renderprofile', username);
   // fetch user's profile
+  fetch ( 'https://api.github.com/users/' + username)
+.then(function (profileResponse) {
+  return profileResponse.json()
+}) 
+.then(function(profileData){
+  console.log(profileData)
+  // create elemnts to hold user data 
+  // const div = document.createElement('div');
+  const h2 = document.createElement('h2');
+  const img = document.createElement('img');
+
+
+// set attributes for h2 and img elemnts
+  h2.innerText = profileData.login
+  img.src = profileData.avatar_url
+  
   // display data in UI
+  // append img before ul element in dom
+  // append h2 before img 
+  linkList.insertAdjacentElement('beforebegin', img) 
+  img.insertAdjacentElement('beforebegin', h2)
+  
+})
 }
 
 function renderRepos(username) {
@@ -22,6 +43,7 @@ function renderRepos(username) {
       return userNameResponse.json()
     }else if (userNameResponse.status === 404) {
       alert('User not found. \n\Check your entry and try again')
+      input.value = ''
     }
   })
   .then(function (repoData){
@@ -49,7 +71,7 @@ function renderRepos(username) {
       linkList.appendChild(li)
 
       // clears input
-      input.value = ""
+      input.value = ''
 
     }
   })
