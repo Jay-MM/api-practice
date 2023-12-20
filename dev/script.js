@@ -32,19 +32,24 @@ function renderRepos(username) {
       // create list and anchor tag elements 
       const li = document.createElement('li')
       const a = document.createElement('a')
-      
+      // assigns the current repo to the repo variable 
       const repo = repoData[i]
 
+      // adds attributes to anchor elemnt
       a.href = repo.html_url
       a.textContent = repo.full_name
       a.target = '_blank'
 
+      // adds bootsrtap class to list item
       li.classList.add('list-group-item')
 
       // append list item to body
       li.appendChild(a)
       // append list item to linkList 
       linkList.appendChild(li)
+
+      // clears input
+      input.value = ""
 
     }
   })
