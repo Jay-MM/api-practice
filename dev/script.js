@@ -6,7 +6,7 @@ const input = document.getElementById('search-input');
 // link-list div 
 const linkList = document.querySelector('.list-group');
 
-function rendnerUserProfile(username) {
+function renderUserProfile(username) {
   console.log('hellow from renderprofile', username);
   // fetch user's profile
   // display data in UI
@@ -26,8 +26,26 @@ function renderRepos(username) {
   })
   .then(function (repoData){
     console.log('repo data', repoData)
+    // display data into link-list div 
+    // for loop to loop over our array of repos
+    for (let i = 0; i < repoData.length; i++) {
+      // create list and anchor tag elements 
+      const li = document.createElement('li')
+      const a = document.createElement('a')
+      
+      const repo = repoData[i]
+
+      a.href = repo.html_url
+      a.textContent = repo.full_name
+      a.target = '_blank'
+
+      // append list item to body
+      li.appendChild(a)
+      // append list item to linkList 
+      linkList.appendChild(li)
+
+    }
   })
-  // display data into link-list div 
 }
 
 function handleSubmit(e) {
@@ -37,11 +55,10 @@ function handleSubmit(e) {
 
   console.log(username);
   // render user profile
-  rendnerUserProfile(username);
+  renderUserProfile(username);
   // render repos
   renderRepos(username);
 }
 
 // event listener for submit event 
 form.addEventListener('submit', handleSubmit)
-  
