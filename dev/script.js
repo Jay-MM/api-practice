@@ -19,16 +19,19 @@ function renderUserProfile(username) {
   const h2 = document.createElement('h2');
   const img = document.createElement('img');
 
+  // clear linkList content before adding new content
+  
+  linkList.innerHTML = '';
 
 // set attributes for h2 and img elemnts
   h2.innerText = profileData.login
   img.src = profileData.avatar_url
+
+
   
-  // display data in UI
-  // append img before ul element in dom
-  // append h2 before img 
-  linkList.insertAdjacentElement('beforebegin', img) 
-  img.insertAdjacentElement('beforebegin', h2)
+   // append h2 and img to linkList
+   linkList.appendChild(h2);
+   linkList.appendChild(img)
   
 })
 }
@@ -76,7 +79,6 @@ function renderRepos(username) {
     }
   })
 }
-
 function handleSubmit(e) {
   e.preventDefault();
   // get username out of input 
@@ -88,6 +90,7 @@ function handleSubmit(e) {
   // render repos
   renderRepos(username);
 }
+
 
 // event listener for submit event 
 form.addEventListener('submit', handleSubmit)
